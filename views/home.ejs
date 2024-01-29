@@ -1,0 +1,47 @@
+<%- include('_navigation'); %>
+
+<div id="home">
+    <h1>Habit Tracker</h1>
+
+    <!-- Add Habit Form -->
+    <form action="/create-habit" method="POST">
+        <label for="habit">Habit:</label>
+        <input type="text" id="habit" name="habit" required>
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required>
+
+        <label for="statusToday">Status Today:</label>
+        <select id="statusToday" name="statusToday">
+            <option value="Done">Done</option>
+            <option value="NotDone">Not Done</option>
+            <option value="None">None</option>
+        </select>
+
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- Display Added Habits -->
+<% for (let habit of habits) { %>
+    <div class="habit-container">
+        <p class="habit-title">Habit: <%= habit.Habit %></p>
+        <% if (habit.dates && habit.dates.length > 0) { %>
+            <p class="date-container">Start Date: <%= formatDate(habit.dates[0].date) %></p>
+            <ul>
+                <% for (let dateEntry of habit.dates) { %>
+                    <li>
+                        <span class="date-container">Date:</span> <%= new Date(dateEntry.date).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric', year: 'numeric' }) %> | <span class="status-container">Status:</span> <%= dateEntry.status %>
+                    </li>
+                <% } %>
+            </ul>
+            <!-- Mark as Done link -->
+            <a href="/done-notdone?id=<%= habit.id %>&date=<%= habit.dates[0].date %>&status=new-status" class="action-link btn btn-success">Mark as Done</a>
+            <!-- Add Delete Link -->
+            <a href="/delete-habit/<%= habit.id %>" class="action-link btn btn-danger">Delete</a>
+
+        <% } else { %>
+            <p>No dates available for this habit.</p>
+        <% } %>
+    </div>
+<% } %>
+</div>

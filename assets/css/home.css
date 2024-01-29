@@ -1,0 +1,58 @@
+/* styles.css */
+
+/* Navigation */
+.navbar {
+  background-color: #1a85f0 !important; /* background color */
+}
+
+.navbar-brand, .navbar-nav a {
+  color: #343a40 !important; /* Dark text color */
+}
+
+/* Home Page */
+#home {
+  margin: 20px;
+}
+
+.habit-container {
+  border: 1px solid #ced4da; /* Light border color */
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: lightgoldenrodyellow; /* background color */
+}
+
+.habit-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.date-container, .status-container {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.action-link, .delete-link {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.action-link:hover, .delete-link:hover {
+  text-decoration: underline;
+}
+
+/* Weekly View Page */
+#weekly-view {
+  margin: 20px;
+}
+
+#weekly-view h2 {
+  margin-bottom: 20px;
+}
+
+/* Add more styles as needed */

@@ -1,0 +1,32 @@
+<%- include('_navigation'); %>
+
+<div id="weekly-view">
+    <h2><%= formatDate(new Date(), 'MMMM yyyy') %></h2>
+
+    <% for (let habit of habits) { %>
+        <div class="habit-container">
+            <h3><%= habit.Habit %></h3>
+
+            <div class="dates">
+                <% for (let d = 0; d < 7; d++) { 
+                    let currentDate = new Date();
+                    currentDate.setDate(currentDate.getDate() - (6 - d));
+                    let currentDateStr = currentDate.toISOString().split('T')[0];
+                    let habitDate = habit.dates.find(entry => entry.date === currentDateStr);
+                %>
+                <div class="date">
+                    <%= formatDate(currentDate, 'd') %>
+                </div>
+                <% } %>
+            </div>
+
+            <!-- Move Mark as Done and Delete links outside the dates loop -->
+            <% if (habit.dates && habit.dates.length > 0) { %>
+                <!-- Mark as Done link -->
+                <a href="/done-notdone?id=<%= habit._id %>&date=<%= habit.dates[0].date %>&status=new-status" class="action-link btn btn-success">Mark as Done</a>
+                <!-- Add Delete Link -->
+                <a href="/delete-habit/<%= habit._id %>" class="action-link delete-link btn btn-danger">Delete</a>
+            <% } %>
+        </div>
+    <% } %>
+</div>
